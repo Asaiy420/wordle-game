@@ -1,0 +1,163 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #121213;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  background-color: #121213;
+}
+
+nav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #3a3a3c;
+}
+
+nav h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.board {
+  width: 330px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.letter {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #3a3a3c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  margin: 2px;
+}
+
+.correct {
+  background-color: #538d4e;
+  border: 2px solid #538d4e;
+}
+
+.almost {
+  background-color: #b59f3b;
+  border: 2px solid #b59f3b;
+}
+
+.error {
+  background-color: #3a3a3c;
+  border: 2px solid #3a3a3c;
+}
+
+.keyboard {
+  width: 100%;
+  height: 200px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.line1,
+.line2,
+.line3 {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+button {
+  width: 40px;
+  height: 50px;
+  margin: 3px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #818384;
+  color: white;
+  border: none;
+}
+
+button:hover {
+  background-color: #9e9e9e;
+}
+
+.line3 button:first-child {
+  width: 80px;
+}
+
+.line3 button:last-child {
+  width: 80px;
+}
+
+.game-container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-right: 50rem;
+  margin-left: 75rem;
+}
+
+.legend {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: white;
+  width: 300px;
+}
+
+.legend h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.color-box.correct {
+  background-color: #538d4e;
+}
+
+.color-box.almost {
+  background-color: #b59f3b;
+}
+
+.color-box.error {
+  background-color: #3a3a3c;
+}
+
