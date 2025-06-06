@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
@@ -14,55 +14,59 @@ const App = () => {
   const [word] = useState(generateWord());
   const [gameOver, setGameOver] = useState(false);
 
-  const handleKeyPress = (key) => {
-    if (gameOver) return;
+  const handleKeyPress = useCallback(
+    (key) => {
+      if (gameOver) return;
 
-    if (key === "ENTER") {
-      if (currentAttempt.letterPos !== 5) return;
+      if (key === "ENTER") {
+        if (currentAttempt.letterPos !== 5) return;
 
-      let currentWord = "";
-      for (let i = 0; i < 5; i++) {
-        currentWord += board[currentAttempt.attemptVal][i];
-      }
-      // if user gets the word, send game over alert
-      if (currentWord === word) {
-        setGameOver(true);
-        alert("You won!");
-        return;
-      }
-      // if user does not get the word in 5 attempts, send game over alert
-      if (currentAttempt.attemptVal === 5) {
-        setGameOver(true);
-        alert("Game Over! The word was: " + word);
-        return;
-      }
+        let currentWord = "";
+        for (let i = 0; i < 5; i++) {
+          currentWord += board[currentAttempt.attemptVal][i];
+        }
+        // if user gets the word, send game over alert
+        if (currentWord === word) {
+          setGameOver(true);
+          alert("You won!");
+          return;
+        }
+        // if user does not get the word in 5 attempts, send game over alert
+        if (currentAttempt.attemptVal === 5) {
+          setGameOver(true);
+          alert("Game Over! The word was: " + word);
+          return;
+        }
 
-      setCurrentAttempt({
-        attemptVal: currentAttempt.attemptVal + 1,
-        letterPos: 0,
-      });
-    } else if (key === "⌫") {
-      if (currentAttempt.letterPos === 0) return;
-      const newBoard = [...board];
-      newBoard[currentAttempt.attemptVal][currentAttempt.letterPos - 1] = "";
-      setBoard(newBoard);
-      setCurrentAttempt({
-        ...currentAttempt,
-        letterPos: currentAttempt.letterPos - 1,
-      });
-      // regex to check if the key is a letter
-    } else if (key.length === 1 && key.match(/[a-z]/i)) {
-      if (currentAttempt.letterPos > 4) return;
-      const newBoard = [...board];
-      newBoard[currentAttempt.attemptVal][currentAttempt.letterPos] =
-        key.toUpperCase();
-      setBoard(newBoard);
-      setCurrentAttempt({
-        ...currentAttempt, // using spread operator to update the current attempt
-        letterPos: currentAttempt.letterPos + 1,
-      });
-    }
-  };
+        setCurrentAttempt({
+          attemptVal: currentAttempt.attemptVal + 1,
+          letterPos: 0,
+        });
+      } else if (key === "⌫") {
+        if (currentAttempt.letterPos === 0) return;
+        const newBoard = [...board];
+        newBoard[currentAttempt.attemptVal][currentAttempt.letterPos - 1] = "";
+        setBoard(newBoard);
+        setCurrentAttempt({
+          ...currentAttempt,
+          letterPos: currentAttempt.letterPos - 1,
+        });
+        // regex to check if the key is a letter
+      } else if (key.length === 1 && key.match(/[a-z]/i)) {
+        if (currentAttempt.letterPos > 4) return;
+        const newBoard = [...board];
+        newBoard[currentAttempt.attemptVal][currentAttempt.letterPos] =
+          key.toUpperCase();
+        setBoard(newBoard);
+        setCurrentAttempt({
+          ...currentAttempt, // using spread operator to update the current attempt
+          letterPos: currentAttempt.letterPos + 1,
+        });
+      }
+    },
+    [board, currentAttempt, gameOver, word]
+  );
+
   // useEffect hook to listen for key presses
   useEffect(() => {
     const handleKeyDown = (event) => {
